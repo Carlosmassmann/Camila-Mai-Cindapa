@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palestra Camila Mai | CINDAPA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080f1e;
+      --bg-card:   #0d1829;
+      --bg-line:   rgba(74, 138, 245, 0.12);
+      --blue:      #4a8af5;
+      --blue-dim:  #2a5fc2;
+      --blue-glow: rgba(74, 138, 245, 0.25);
+      --text:      #e8edf5;
+      --muted:     #7a8a9e;
+      --border:    rgba(74, 138, 245, 0.18);
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ── PARTICLES ── */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--blue);
+      opacity: 0;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 0.4; }
+      90%  { opacity: 0.15; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    section { position: relative; z-index: 2; }
+
+    /* ── HEADER / NAV ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      backdrop-filter: blur(12px);
+      background: rgba(8, 15, 30, 0.7);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+
+    .logo span { color: var(--blue); }
+
+    .badge-header {
+      background: var(--blue-glow);
+      border: 1px solid var(--border);
+      color: var(--blue);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74, 138, 245, 0.15) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--bg-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-line) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue-glow);
+      border: 1px solid var(--border);
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    .tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+      max-width: 780px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 52px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .meta-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: border-color 0.3s ease;
+    }
+
+    .meta-chip:hover { border-color: var(--blue); }
+
+    .meta-chip .icon {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .meta-chip .label {
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 400;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .meta-chip .value {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      margin: 80px 0;
+      opacity: 0.4;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 60px;
+    }
+
+    /* ── ABOUT SECTION ── */
+    .about { padding: 100px 0; }
+
+    .about h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .about h2 em { font-style: italic; color: var(--blue); }
+
+    .about-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 48px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-text strong { color: var(--text); font-weight: 600; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px var(--blue-glow);
+    }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── TOPICS ── */
+    .topics { padding: 100px 0; }
+
+    .topics h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .topics-intro {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 56px;
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .topic-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: all 0.35s ease;
+      cursor: default;
+    }
+
+    .topic-card:hover {
+      border-color: var(--blue);
+      background: rgba(74, 138, 245, 0.05);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px var(--blue-glow);
+    }
+
+    .topic-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      border-radius: 10px;
+      background: var(--blue-glow);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .topic-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .topic-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── FOR WHOM ── */
+    .for-whom { padding: 100px 0; }
+
+    .for-whom h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .for-whom-intro {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .audience-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .audience-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: all 0.35s ease;
+    }
+
+    .audience-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px var(--blue-glow);
+    }
+
+    .audience-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .audience-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .audience-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── SPEAKER ── */
+    .speaker { padding: 100px 0; }
+
+    .speaker-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 56px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .speaker-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74, 138, 245, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .speaker-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-dim), var(--blue));
+      border: 3px solid var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 0 40px var(--blue-glow);
+      flex-shrink: 0;
+    }
+
+    .speaker-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .speaker-name {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .speaker-title {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .speaker-bio {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.95rem;
+      max-width: 560px;
+    }
+
+    .speaker-bio strong { color: var(--text); font-weight: 600; }
+
+    .credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .credential {
+      background: var(--blue-glow);
+      border: 1px solid var(--border);
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    /* ── QUOTE ── */
+    .quote-section { padding: 80px 0; }
+
+    .quote-block {
+      background: linear-gradient(135deg, rgba(74, 138, 245, 0.08), rgba(42, 95, 194, 0.06));
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue);
+      border-radius: 16px;
+      padding: 48px 52px;
+      position: relative;
+    }
+
+    .quote-mark {
+      font-family: var(--serif);
+      font-size: 5rem;
+      line-height: 0.5;
+      color: var(--blue);
+      opacity: 0.4;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .quote-text {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .quote-author {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── CTA ── */
+    .cta-section { padding: 100px 0 140px; }
+
+    .cta-block {
+      background: linear-gradient(135deg, var(--bg-card), rgba(74, 138, 245, 0.08));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 72px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-block::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74, 138, 245, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-block h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .cta-block p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 18px 40px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dim);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(74, 138, 245, 0.4);
+    }
+
+    .btn-primary:active { transform: translateY(0); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    footer span { color: var(--blue); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-body { grid-template-columns: 1fr; gap: 32px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .audience-cards { grid-template-columns: 1fr; }
+      .speaker-card { grid-template-columns: 1fr; text-align: center; padding: 36px 28px; }
+      .speaker-avatar { margin: 0 auto; }
+      .speaker-bio { max-width: 100%; }
+      .cta-block { padding: 48px 28px; }
+      .quote-block { padding: 36px 28px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-meta { flex-direction: column; }
+      .meta-chip { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Particles -->
+<div id="particles"></div>
+
+<!-- Header -->
+<header id="header">
+  <div class="container">
+    <div class="logo">Camila <span>Mai</span></div>
+    <div class="badge-header">Proposta de Palestra</div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="tag" id="hero-tag">Proposta Exclusiva · CINDAPA</div>
+    <h1 id="hero-title">
+      Nutrição que <em>transforma</em><br/>o desempenho de quem<br/>protege os outros
+    </h1>
+    <p class="hero-sub" id="hero-sub">
+      Uma palestra prática e transformadora para profissionais da vigilância,
+      com estratégias reais de alimentação e energia para quem trabalha em turnos e horários desafiadores.
+    </p>
+    <div class="hero-meta" id="hero-meta">
+      <div class="meta-chip">
+        <span class="icon">⏱</span>
+        <div>
+          <span class="label">Duração</span>
+          <span class="value">2 horas</span>
+        </div>
+      </div>
+      <div class="meta-chip">
+        <span class="icon">🎤</span>
+        <div>
+          <span class="label">Formato</span>
+          <span class="value">Presencial ou Online</span>
+        </div>
+      </div>
+      <div class="meta-chip">
+        <span class="icon">👥</span>
+        <div>
+          <span class="label">Público</span>
+          <span class="value">Profissionais de Segurança</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- About -->
+<section class="about">
+  <div class="container">
+    <div class="section-label reveal">Sobre a palestra</div>
+    <h2 class="reveal">A energia certa<br/>para proteger <em>com excelência</em></h2>
+    <div class="about-body">
+      <div class="about-text">
+        <p class="reveal">
+          Profissionais da vigilância e segurança lidam com um paradoxo invisível:
+          são responsáveis por proteger vidas, mas frequentemente negligenciam a própria saúde.
+          <strong>Turnos irregulares, alimentação descuidada e fadiga crônica</strong> comprometem
+          o estado de alerta, a tomada de decisão e o desempenho operacional.
+        </p>
+        <p class="reveal">
+          Esta palestra foi desenvolvida especificamente para essa realidade —
+          com <strong>estratégias práticas, aplicáveis e baseadas em evidências</strong>
+          para manter energia, clareza mental e disposição ao longo de toda a jornada de trabalho,
+          independentemente do horário ou turno.
+        </p>
+        <p class="reveal">
+          Sem dietas restritivas. Sem receitas impossíveis de seguir.
+          <strong>Apenas método, estrutura e resultado.</strong>
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Anos de experiência clínica</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-number">8.5k</div>
+          <div class="stat-label">Atendimentos realizados</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Conteúdo baseado em evidências</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-number">2h</div>
+          <div class="stat-label">De imersão prática e direta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- Topics -->
+<section class="topics">
+  <div class="container">
+    <div class="section-label reveal">Conteúdo programático</div>
+    <h2 class="reveal">O que será abordado</h2>
+    <p class="topics-intro reveal">
+      Temas selecionados para a realidade de quem trabalha com segurança —
+      práticos, diretos e com aplicação imediata.
+    </p>
+    <div class="topics-grid">
+      <div class="topic-card reveal">
+        <div class="topic-icon">⚡</div>
+        <div>
+          <div class="topic-title">Energia sustentada ao longo do turno</div>
+          <div class="topic-desc">Como se alimentar para manter o estado de alerta e evitar a queda de energia nos momentos críticos da jornada.</div>
+        </div>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-icon">🧠</div>
+        <div>
+          <div class="topic-title">Nutrição para clareza mental</div>
+          <div class="topic-desc">Alimentos e hábitos que aumentam o foco, a agilidade de resposta e a tomada de decisão sob pressão.</div>
+        </div>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-icon">🕐</div>
+        <div>
+          <div class="topic-title">Alimentação em turnos e horários irregulares</div>
+          <div class="topic-desc">Estratégias específicas para quem trabalha à noite, em escala ou em horários não convencionais — sem sofrimento.</div>
+        </div>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-icon">💪</div>
+        <div>
+          <div class="topic-title">Controle do estresse e ansiedade</div>
+          <div class="topic-desc">Como a alimentação impacta diretamente o sistema nervoso e a capacidade de lidar com situações de tensão.</div>
+        </div>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-icon">🥗</div>
+        <div>
+          <div class="topic-title">Praticidade na rotina</div>
+          <div class="topic-desc">Marmitas, refeições rápidas e escolhas inteligentes para quem não tem tempo — e ainda assim quer resultados.</div>
+        </div>
+      </div>
+      <div class="topic-card reveal">
+        <div class="topic-icon">📊</div>
+        <div>
+          <div class="topic-title">Saúde metabólica e longevidade profissional</div>
+          <div class="topic-desc">Como cuidar do corpo hoje para manter performance e saúde ao longo de toda a carreira na segurança.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- For Whom -->
+<section class="for-whom">
+  <div class="container">
+    <div class="section-label reveal">Público-alvo</div>
+    <h2 class="reveal">Para quem é esta palestra</h2>
+    <p class="for-whom-intro reveal">
+      Desenvolvida especificamente para profissionais da vigilância e segurança privada,
+      com foco nos desafios reais da categoria.
+    </p>
+    <div class="audience-cards">
+      <div class="audience-card reveal">
+        <span class="audience-icon">🛡️</span>
+        <div class="audience-title">Vigilantes e Agentes</div>
+        <div class="audience-desc">Profissionais em campo que precisam de energia e atenção máxima durante toda a jornada.</div>
+      </div>
+      <div class="audience-card reveal">
+        <span class="audience-icon">🎖️</span>
+        <div class="audience-title">Supervisores e Coordenadores</div>
+        <div class="audience-desc">Líderes que querem levar mais saúde e performance para suas equipes.</div>
+      </div>
+      <div class="audience-card reveal">
+        <span class="audience-icon">🏢</span>
+        <div class="audience-title">Gestores de RH</div>
+        <div class="audience-desc">Profissionais de recursos humanos que buscam soluções de saúde e bem-estar para o time de segurança.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- Speaker -->
+<section class="speaker">
+  <div class="container">
+    <div class="section-label reveal">Palestrante</div>
+    <div class="speaker-card reveal">
+      <div class="speaker-avatar">CM</div>
+      <div>
+        <div class="speaker-label">Nutricionista Especialista</div>
+        <div class="speaker-name">Camila Mai</div>
+        <div class="speaker-title">CRN · Nutrição Clínica e Performance</div>
+        <p class="speaker-bio">
+          Com <strong>mais de 15 anos de experiência clínica</strong> e <strong>mais de 8.500 atendimentos realizados</strong>,
+          Camila Mai é referência em nutrição aplicada ao cotidiano e à performance humana.
+          Seu trabalho combina rigor científico com comunicação direta e acessível —
+          tornando mudanças reais possíveis para qualquer perfil de pessoa.
+        </p>
+        <div class="credentials">
+          <span class="credential">+15 anos de clínica</span>
+          <span class="credential">+8.500 atendimentos</span>
+          <span class="credential">Nutrição & Performance</span>
+          <span class="credential">Saúde Corporativa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- Quote -->
+<section class="quote-section">
+  <div class="container">
+    <div class="quote-block reveal">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">
+        Ainda não conheci uma pessoa que tenha melhorado seu estilo de vida
+        e não tenha conquistado resultados superiores na carreira.
+      </p>
+      <div class="quote-author">— Camila Mai</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-block reveal">
+      <h2>Vamos levar esta palestra<br/>para a CINDAPA?</h2>
+      <p>Entre em contato para agendar ou tirar qualquer dúvida sobre a proposta.</p>
+      <a href="https://wa.me/5500000000000" class="btn-primary" target="_blank" rel="noopener">
+        Falar com a Camila
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>© 2025 <span>Camila Mai</span> · Nutrição & Performance · Todos os direitos reservados</p>
+  </div>
+</footer>
+
+<script>
+  // ── PARTICLES ──
+  const container = document.getElementById('particles');
+  const count = 18;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    const size = Math.random() * 4 + 2;
+    p.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      animation-duration: ${Math.random() * 14 + 10}s;
+      animation-delay: ${Math.random() * 8}s;
+      opacity: 0;
+    `;
+    container.appendChild(p);
+  }
+
+  // ── GSAP SCROLL ANIMATIONS ──
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero entrance
+  gsap.timeline({ delay: 0.2 })
+    .from('#hero-tag', { opacity: 0, y: 20, duration: 0.7, ease: 'power3.out' })
+    .from('#hero-title', { opacity: 0, y: 40, duration: 0.9, ease: 'power3.out' }, '-=0.4')
+    .from('#hero-sub', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+    .from('#hero-meta .meta-chip', {
+      opacity: 0, y: 20, duration: 0.6, stagger: 0.12, ease: 'power2.out'
+    }, '-=0.4');
+
+  // Scroll reveals
+  gsap.utils.toArray('.reveal').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 44 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.85,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
+
+  // Header shrink on scroll
+  const header = document.getElementById('header');
+  ScrollTrigger.create({
+    start: 80,
+    onEnter: () => header.style.padding = '12px 0',
+    onLeaveBack: () => header.style.padding = '20px 0',
+  });
+
+  // Stat cards counter animation
+  document.querySelectorAll('.stat-number').forEach(el => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        el.style.transition = 'color 0.6s ease';
+        el.style.color = '#7cb3ff';
+        setTimeout(() => el.style.color = '#4a8af5', 600);
+      }
+    });
+  });
+</script>
+</body>
+</html>

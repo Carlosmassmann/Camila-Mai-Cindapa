@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:camilamai-matrisoja2.lovable.app)",
+      "Bash(curl -s \"https://camilamai-matrisoja2.lovable.app\")",
+      "Bash(curl -s \"https://camilamai-matrisoja2.lovable.app/assets/index-DCkY55g2.css\")",
+      "Bash(curl -s \"https://camilamai-matrisoja2.lovable.app/assets/index-Cn1xwuFU.js\")",
+      "Bash(grep -oE '\\(#[0-9a-fA-F]{3,6}|rgb\\\\\\([^\\)]+\\\\\\)|--[a-z-]+\\)')",
+      "Bash(curl -s https://camilamai-matrisoja2.lovable.app/assets/index-DCkY55g2.css)",
+      "Bash(tr ';' '\\\\n')",
+      "Bash(curl -s https://camilamai-matrisoja2.lovable.app/assets/index-Cn1xwuFU.js)",
+      "Bash(curl -s https://camilamai-matrisoja2.lovable.app)",
+      "Bash(tr '}' '\\\\n')"
+    ]
+  }
+}

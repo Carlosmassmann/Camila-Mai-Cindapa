@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camila Mai · Propostas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #06090f;
+      color: #e8eaed;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+    .sub {
+      font-size: 0.85rem;
+      color: #788090;
+      margin-bottom: 60px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+    }
+    .cards {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 760px;
+    }
+    a.card {
+      display: flex;
+      flex-direction: column;
+      background: #0b1018;
+      border-radius: 20px;
+      padding: 36px 32px;
+      text-decoration: none;
+      color: inherit;
+      width: 320px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    a.card.blue { border: 1px solid rgba(74, 138, 245, 0.2); }
+    a.card.gold { border: 1px solid rgba(201, 168, 76, 0.2); }
+    a.card.blue:hover { border-color: rgba(74, 138, 245, 0.5); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(74, 138, 245, 0.1); }
+    a.card.gold:hover { border-color: rgba(201, 168, 76, 0.5); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(201, 168, 76, 0.1); }
+    .card-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 20px;
+      align-self: flex-start;
+    }
+    .blue .card-badge { background: rgba(74, 138, 245, 0.12); color: #4a8af5; border: 1px solid rgba(74, 138, 245, 0.2); }
+    .gold .card-badge { background: rgba(201, 168, 76, 0.12); color: #c9a84c; border: 1px solid rgba(201, 168, 76, 0.2); }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: #788090;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+    .card-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .blue .card-link { color: #4a8af5; }
+    .gold .card-link { color: #c9a84c; }
+    @media (max-width: 480px) {
+      .cards { flex-direction: column; }
+      a.card { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">Camila Mai</div>
+  <div class="sub">Nutricionista · Propostas</div>
+  <div class="cards">
+    <a class="card blue" href="cindapa.html">
+      <span class="card-badge">Palestra</span>
+      <div class="card-title">Proposta CINDAPA</div>
+      <div class="card-desc">Palestra sobre nutrição e performance para profissionais de vigilância e segurança. 2 horas, aplicação imediata.</div>
+      <div class="card-link">Ver proposta →</div>
+    </a>
+    <a class="card gold" href="mai-metodo.html">
+      <span class="card-badge">Programa Corporativo</span>
+      <div class="card-title">MAI Método Corporativo</div>
+      <div class="card-desc">Programa de 6 meses de saúde e performance para empresas. Três pilares: educação, acompanhamento e indicadores.</div>
+      <div class="card-link">Ver proposta →</div>
+    </a>
+  </div>
+</body>
+</html>
