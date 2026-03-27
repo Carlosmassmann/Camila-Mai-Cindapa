@@ -10,7 +10,10 @@
       "Bash(tr ';' '\\\\n')",
       "Bash(curl -s https://camilamai-matrisoja2.lovable.app/assets/index-Cn1xwuFU.js)",
       "Bash(curl -s https://camilamai-matrisoja2.lovable.app)",
-      "Bash(tr '}' '\\\\n')"
+      "Bash(tr '}' '\\\\n')",
+      "Bash(powershell -Command \"Select-String -Path ''c:/Users/Usuario/Documents/LandingPage Camila Mai Proposta/cindapa.html'' -Pattern ''—|–''; Select-String -Path ''c:/Users/Usuario/Documents/LandingPage Camila Mai Proposta/mai-metodo.html'' -Pattern ''—|–''\")",
+      "Bash(powershell -Command \":*)",
+      "Bash(powershell -Command \"Select-String -Path ''c:/Users/Usuario/Documents/LandingPage Camila Mai Proposta/cindapa.html'',''c:/Users/Usuario/Documents/LandingPage Camila Mai Proposta/mai-metodo.html'' -Pattern ''\\(?<=[a-zA-Z>]\\) - \\(?=[a-zA-Z<]\\)''\")"
     ]
   }
 }
