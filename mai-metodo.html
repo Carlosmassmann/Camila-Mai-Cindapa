@@ -967,6 +967,53 @@
     footer p { color: var(--muted); font-size: 0.8rem; }
     footer span { color: var(--gold); }
 
+    /* ── VIDEO SECTION ── */
+    .video-section { padding: 100px 0; }
+
+    .video-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .video-section h2 em { font-style: italic; color: var(--gold); }
+
+    .video-intro {
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    .video-shorts-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 50px var(--gold-glow), 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .video-shorts-wrap::before {
+      content: '';
+      display: block;
+      padding-top: 177.78%;
+    }
+
+    .video-shorts-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
     /* ── SCROLL REVEAL ── */
     .reveal { opacity: 0; transform: translateY(44px); }
     .reveal-left { opacity: 0; transform: translateX(-40px); }
@@ -1337,6 +1384,44 @@
     </div>
   </div>
 </section>
+
+<!-- Vídeo Palestra -->
+<section class="video-section">
+  <div class="container">
+    <div class="section-label reveal" style="justify-content: center;">Camila em ação</div>
+    <h2 class="reveal">Veja como é uma<br/><em>palestra da Camila</em></h2>
+    <p class="video-intro reveal">Uma amostra do conteúdo, da didática e da energia que seus colaboradores vão receber.</p>
+    <div class="video-shorts-wrap reveal">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/j8e9dMm4XIQ?rel=0&modestbranding=1&playsinline=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- Depoimento em Vídeo -->
+<section class="video-section">
+  <div class="container">
+    <div class="section-label reveal" style="justify-content: center;">Depoimento</div>
+    <h2 class="reveal">O que dizem sobre<br/><em>a experiência</em></h2>
+    <p class="video-intro reveal">Veja o impacto real na visão de quem participou.</p>
+    <div class="video-shorts-wrap reveal">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/rCDK9zWH4dA?rel=0&modestbranding=1&playsinline=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
 
 <!-- CTA -->
 <section class="cta-section">

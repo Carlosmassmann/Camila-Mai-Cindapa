@@ -691,7 +691,93 @@
       transform: translateY(40px);
     }
 
+    /* ── HERO SPLIT ── */
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-img-wrap {
+      width: 340px;
+      height: 460px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 60px var(--blue-glow), 0 24px 60px rgba(0,0,0,0.4);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,15,30,0.5) 0%, transparent 50%);
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ── VIDEO SECTION ── */
+    .video-section { padding: 100px 0; }
+
+    .video-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .video-section h2 em { font-style: italic; color: var(--blue); }
+
+    .video-intro {
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    .video-shorts-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 50px var(--blue-glow), 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .video-shorts-wrap::before {
+      content: '';
+      display: block;
+      padding-top: 177.78%;
+    }
+
+    .video-shorts-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
     /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-split { grid-template-columns: 1fr; }
+      .hero-img-wrap { width: 100%; height: 340px; }
+    }
+
     @media (max-width: 768px) {
       .about-body { grid-template-columns: 1fr; gap: 32px; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
@@ -728,35 +814,42 @@
   <div class="hero-bg-glow"></div>
   <div class="hero-grid"></div>
   <div class="container">
-    <div class="tag" id="hero-tag">Proposta Exclusiva · CINDAPA</div>
-    <h1 id="hero-title">
-      Nutrição que <em>transforma</em><br/>o desempenho de quem<br/>protege os outros
-    </h1>
-    <p class="hero-sub" id="hero-sub">
-      Uma palestra prática e transformadora para profissionais da vigilância,
-      com estratégias reais de alimentação e energia para quem trabalha em turnos e horários desafiadores.
-    </p>
-    <div class="hero-meta" id="hero-meta">
-      <div class="meta-chip">
-        <span class="icon">⏱</span>
-        <div>
-          <span class="label">Duração</span>
-          <span class="value">2 horas</span>
+    <div class="hero-split">
+      <div>
+        <div class="tag" id="hero-tag">Proposta Exclusiva · CINDAPA</div>
+        <h1 id="hero-title">
+          Nutrição que <em>transforma</em><br/>o desempenho de quem<br/>protege os outros
+        </h1>
+        <p class="hero-sub" id="hero-sub">
+          Uma palestra prática e transformadora para profissionais da vigilância,
+          com estratégias reais de alimentação e energia para quem trabalha em turnos e horários desafiadores.
+        </p>
+        <div class="hero-meta" id="hero-meta">
+          <div class="meta-chip">
+            <span class="icon">⏱</span>
+            <div>
+              <span class="label">Duração</span>
+              <span class="value">2 horas</span>
+            </div>
+          </div>
+          <div class="meta-chip">
+            <span class="icon">🎤</span>
+            <div>
+              <span class="label">Formato</span>
+              <span class="value">Presencial ou Online</span>
+            </div>
+          </div>
+          <div class="meta-chip">
+            <span class="icon">👥</span>
+            <div>
+              <span class="label">Público</span>
+              <span class="value">Profissionais de Segurança</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="meta-chip">
-        <span class="icon">🎤</span>
-        <div>
-          <span class="label">Formato</span>
-          <span class="value">Presencial ou Online</span>
-        </div>
-      </div>
-      <div class="meta-chip">
-        <span class="icon">👥</span>
-        <div>
-          <span class="label">Público</span>
-          <span class="value">Profissionais de Segurança</span>
-        </div>
+      <div class="hero-img-wrap" id="hero-img">
+        <img src="camila-hero.jpg" alt="Camila Mai palestrando" class="hero-img" />
       </div>
     </div>
   </div>
@@ -930,6 +1023,44 @@
 
 <div class="container"><div class="divider"></div></div>
 
+<!-- Vídeo Palestra -->
+<section class="video-section">
+  <div class="container">
+    <div class="section-label reveal" style="justify-content: center;">Camila em ação</div>
+    <h2 class="reveal">Veja como é uma<br/><em>palestra da Camila</em></h2>
+    <p class="video-intro reveal">Uma amostra do conteúdo, da didática e da energia que seus colaboradores vão receber.</p>
+    <div class="video-shorts-wrap reveal">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/j8e9dMm4XIQ?rel=0&modestbranding=1&playsinline=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- Depoimento em Vídeo -->
+<section class="video-section">
+  <div class="container">
+    <div class="section-label reveal" style="justify-content: center;">Depoimento</div>
+    <h2 class="reveal">O que dizem sobre<br/><em>a experiência</em></h2>
+    <p class="video-intro reveal">Veja o impacto real da palestra na visão de quem participou.</p>
+    <div class="video-shorts-wrap reveal">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/rCDK9zWH4dA?rel=0&modestbranding=1&playsinline=1"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
 <!-- Quote -->
 <section class="quote-section">
   <div class="container">
@@ -994,7 +1125,10 @@
     .from('#hero-sub', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.5')
     .from('#hero-meta .meta-chip', {
       opacity: 0, y: 20, duration: 0.6, stagger: 0.12, ease: 'power2.out'
-    }, '-=0.4');
+    }, '-=0.4')
+    .from('#hero-img', {
+      opacity: 0, x: 40, duration: 1, ease: 'power3.out'
+    }, '-=1');
 
   // Scroll reveals
   gsap.utils.toArray('.reveal').forEach(el => {
