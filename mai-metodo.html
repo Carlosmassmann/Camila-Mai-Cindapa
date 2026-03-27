@@ -967,6 +967,62 @@
     footer p { color: var(--muted); font-size: 0.8rem; }
     footer span { color: var(--gold); }
 
+    /* ── HERO SPLIT ── */
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-img-wrap {
+      width: 340px;
+      height: 460px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 60px var(--gold-glow), 0 24px 60px rgba(0,0,0,0.5);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,9,15,0.5) 0%, transparent 50%);
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .hero-split {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-img-wrap {
+        order: -1;
+        width: calc(100% + 56px);
+        margin-left: -28px;
+        margin-right: -28px;
+        margin-top: -150px;
+        height: 460px;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+      }
+
+      .hero-img-wrap::after {
+        background: linear-gradient(to top, var(--bg) 18%, transparent 60%);
+      }
+    }
+
     /* ── VIDEO SECTION ── */
     .video-section { padding: 100px 0; }
 
@@ -1058,24 +1114,31 @@
   <div class="hero-radial"></div>
   <div class="hero-lines"></div>
   <div class="container">
-    <div class="mai-label" id="hero-tag">MAI Método · Saúde e Performance Corporativa</div>
-    <div class="mai-letters" id="hero-letters">
-      <span class="mai-letter active">M</span><span class="mai-letter">.</span><span class="mai-letter active">A</span><span class="mai-letter">.</span><span class="mai-letter active">I</span>
-    </div>
-    <h1 id="hero-title">
-      Hoje, a maior perda de produtividade<br/>
-      não está na falta de capacidade técnica —<br/>
-      <em>está no <span class="gold">estilo de vida</span> das pessoas</em>
-    </h1>
-    <p class="hero-sub" id="hero-sub">
-      Um programa estruturado de 6 meses para transformar saúde, energia e performance
-      dos seus colaboradores — com método, acompanhamento e indicadores mensuráveis.
-    </p>
-    <div class="hero-chips" id="hero-chips">
-      <div class="hero-chip"><span class="dot"></span> 6 meses de programa</div>
-      <div class="hero-chip"><span class="dot"></span> 3 pilares estruturados</div>
-      <div class="hero-chip"><span class="dot"></span> Indicadores mensuráveis</div>
-      <div class="hero-chip"><span class="dot"></span> Alinhado à NR-1</div>
+    <div class="hero-split">
+      <div>
+        <div class="mai-label" id="hero-tag">MAI Método · Saúde e Performance Corporativa</div>
+        <div class="mai-letters" id="hero-letters">
+          <span class="mai-letter active">M</span><span class="mai-letter">.</span><span class="mai-letter active">A</span><span class="mai-letter">.</span><span class="mai-letter active">I</span>
+        </div>
+        <h1 id="hero-title">
+          Hoje, a maior perda de produtividade<br/>
+          não está na falta de capacidade técnica,<br/>
+          <em>está no <span class="gold">estilo de vida</span> das pessoas</em>
+        </h1>
+        <p class="hero-sub" id="hero-sub">
+          Um programa estruturado de 6 meses para transformar saúde, energia e performance
+          dos seus colaboradores, com método, acompanhamento e indicadores mensuráveis.
+        </p>
+        <div class="hero-chips" id="hero-chips">
+          <div class="hero-chip"><span class="dot"></span> 6 meses de programa</div>
+          <div class="hero-chip"><span class="dot"></span> 3 pilares estruturados</div>
+          <div class="hero-chip"><span class="dot"></span> Indicadores mensuráveis</div>
+          <div class="hero-chip"><span class="dot"></span> Alinhado à NR-1</div>
+        </div>
+      </div>
+      <div class="hero-img-wrap" id="hero-img">
+        <img src="camila-mai-metodo.jpg" alt="Camila Mai palestrando" class="hero-img" />
+      </div>
     </div>
   </div>
 </section>
@@ -1433,7 +1496,7 @@
         O programa é desenvolvido junto com você — adaptado à realidade, ao porte
         e aos objetivos da sua organização. Entre em contato para dar o próximo passo.
       </p>
-      <a href="https://wa.me/5500000000000" class="btn-gold" target="_blank" rel="noopener">
+      <a href="https://wa.me/555199624718" class="btn-gold" target="_blank" rel="noopener">
         Falar com a Camila
         <span>→</span>
       </a>
@@ -1477,7 +1540,10 @@
     .from('#hero-sub', { opacity: 0, y: 28, duration: 0.7, ease: 'power3.out' }, '-=0.5')
     .from('#hero-chips .hero-chip', {
       opacity: 0, y: 16, duration: 0.5, stagger: 0.1, ease: 'power2.out'
-    }, '-=0.4');
+    }, '-=0.4')
+    .from('#hero-img', {
+      opacity: 0, x: 40, duration: 1, ease: 'power3.out'
+    }, '-=1');
 
   // Scroll reveals
   gsap.utils.toArray('.reveal').forEach(el => {
