@@ -505,17 +505,18 @@
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue-dim), var(--blue));
       border: 3px solid var(--blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--serif);
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: white;
       box-shadow: 0 0 40px var(--blue-glow);
       flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .speaker-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
 
     .speaker-label {
@@ -836,7 +837,7 @@
       <div>
         <div class="tag" id="hero-tag">Proposta Exclusiva · CINDAPA</div>
         <h1 id="hero-title">
-          Nutrição que <em>transforma</em><br/>o desempenho de quem<br/>protege os outros
+          Estilo de Vida para<br/><em>Resultados Superiores</em>
         </h1>
         <p class="hero-sub" id="hero-sub">
           Uma palestra prática e transformadora para profissionais da vigilância,
@@ -1015,9 +1016,11 @@
 <!-- Speaker -->
 <section class="speaker">
   <div class="container">
-    <div class="section-label reveal">Palestrante</div>
+    <div class="section-label reveal">Sobre a Palestrante</div>
     <div class="speaker-card reveal">
-      <div class="speaker-avatar">CM</div>
+      <div class="speaker-avatar">
+        <img src="camila-profile.png" alt="Camila Mai" />
+      </div>
       <div>
         <div class="speaker-label">Nutricionista Especialista</div>
         <div class="speaker-name">Camila Mai</div>
@@ -1025,14 +1028,24 @@
         <p class="speaker-bio">
           Com <strong>mais de 15 anos de experiência clínica</strong> e <strong>mais de 8.500 atendimentos realizados</strong>,
           Camila Mai é referência em nutrição aplicada ao cotidiano e à performance humana.
-          Seu trabalho combina rigor científico com comunicação direta e acessível —
+          Seu trabalho combina rigor científico com comunicação direta e acessível,
           tornando mudanças reais possíveis para qualquer perfil de pessoa.
         </p>
         <div class="credentials">
-          <span class="credential">+15 anos de clínica</span>
-          <span class="credential">+8.500 atendimentos</span>
-          <span class="credential">Nutrição & Performance</span>
-          <span class="credential">Saúde Corporativa</span>
+          <span class="credential">Nutricionista (UNISC, 2010)</span>
+          <span class="credential">Nutrição Clínica Estética (iPGS, 2012)</span>
+          <span class="credential">Nutrição Clínica Esportiva (iPGS, 2013)</span>
+          <span class="credential">Advanced Nutrition IFBB (2015)</span>
+          <span class="credential">Modulação Intestinal (2018)</span>
+          <span class="credential">EPIGENES (2018)</span>
+          <span class="credential">Formação em Palestrante APRESENTARTE (2019)</span>
+          <span class="credential">Nutrição Funcional (2021)</span>
+          <span class="credential">PNL Internacional (2021)</span>
+          <span class="credential">Fitoterapia (2022)</span>
+          <span class="credential">MBA Business Intuition AMF (2023)</span>
+          <span class="credential">Ontopsicologia AMF (em andamento)</span>
+          <span class="credential">Saúde Mental ABMFI (2025)</span>
+          <span class="credential">Idealizadora Mai.Co Health & Spa</span>
         </div>
       </div>
     </div>

@@ -781,17 +781,18 @@
     .speaker-avatar {
       width: 120px; height: 120px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold-dim), var(--gold));
       border: 2px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--serif);
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: #06090f;
       box-shadow: 0 0 50px var(--gold-glow);
       flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .speaker-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
 
     .speaker-label {
@@ -1408,9 +1409,11 @@
 <!-- Speaker -->
 <section class="speaker">
   <div class="container">
-    <div class="section-label reveal">Quem desenvolve o programa</div>
+    <div class="section-label reveal">Sobre a Palestrante</div>
     <div class="speaker-card reveal">
-      <div class="speaker-avatar">CM</div>
+      <div class="speaker-avatar">
+        <img src="camila-profile.png" alt="Camila Mai" />
+      </div>
       <div>
         <div class="speaker-label">Nutricionista Responsável</div>
         <div class="speaker-name">Camila Mai</div>
@@ -1420,14 +1423,24 @@
           Camila Mai desenvolveu o MAI Método para levar para o ambiente corporativo o que ela aplica clinicamente há anos:
           um sistema estruturado que gera mudança real, não apenas informação.
           <br/><br/>
-          O programa é <strong>personalizado de acordo com a sua empresa</strong> —
+          O programa é <strong>personalizado de acordo com a sua empresa</strong>,
           porque cada organização tem uma realidade diferente e merece uma solução sob medida.
         </p>
         <div class="credentials">
-          <span class="credential">+15 anos de clínica</span>
-          <span class="credential">+8.500 atendimentos</span>
-          <span class="credential">Performance Corporativa</span>
-          <span class="credential">NR-1 / Saúde Ocupacional</span>
+          <span class="credential">Nutricionista (UNISC, 2010)</span>
+          <span class="credential">Nutrição Clínica Estética (iPGS, 2012)</span>
+          <span class="credential">Nutrição Clínica Esportiva (iPGS, 2013)</span>
+          <span class="credential">Advanced Nutrition IFBB (2015)</span>
+          <span class="credential">Modulação Intestinal (2018)</span>
+          <span class="credential">EPIGENES (2018)</span>
+          <span class="credential">Formação em Palestrante APRESENTARTE (2019)</span>
+          <span class="credential">Nutrição Funcional (2021)</span>
+          <span class="credential">PNL Internacional (2021)</span>
+          <span class="credential">Fitoterapia (2022)</span>
+          <span class="credential">MBA Business Intuition AMF (2023)</span>
+          <span class="credential">Ontopsicologia AMF (em andamento)</span>
+          <span class="credential">Saúde Mental ABMFI (2025)</span>
+          <span class="credential">Idealizadora Mai.Co Health & Spa</span>
         </div>
       </div>
     </div>
